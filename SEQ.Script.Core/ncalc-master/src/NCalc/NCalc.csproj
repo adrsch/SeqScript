@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net461;netstandard2.0;net5.0</TargetFrameworks>
+    <Authors>Sebastien Ros and contributors</Authors>
+    <Copyright>Sebastien Ros and contributors</Copyright>
+    <Company>https://github.com/ncalc</Company>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PackageId>NCalcSync</PackageId>
+    <PackageProjectUrl>https://github.com/ncalc/ncalc</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ncalc/ncalc.git</RepositoryUrl>
+    <PackageTags>ncalc; sync; core</PackageTags>
+    <PackageIcon>NCalc.png</PackageIcon>
+    <Description>NCalc is a mathematical expressions evaluator in .NET. NCalc can parse any expression and evaluate the result, including static or dynamic parameters and custom functions. This version targets .NET Standard 2.0 framework.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <AssemblyName>Calcc</AssemblyName>
+    <RootNamespace>Calcc</RootNamespace>
+  </PropertyGroup>
+
+  <!-- TRACE symbol seems to be always defined by default, let's undefine it for the Release builds -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants.Replace("TRACE", "NOTRACE"))</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net35' ">
+    <Compile Remove="Properties\ExcludeFromCodeCoverageAttribute35.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr3.Runtime" Version="3.5.1" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <FrameworkPathOverride>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Resources\NCalc.png" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+</Project>

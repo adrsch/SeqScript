@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr" Version="3.5.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Stride.Engine" Version="4.2.0.1" />
+    <PackageReference Include="Stride.Physics" Version="4.2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ncalc-master\src\NCalc\bin\" />
+  </ItemGroup>
+
+</Project>
