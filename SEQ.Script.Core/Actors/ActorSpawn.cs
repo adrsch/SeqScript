@@ -40,15 +40,30 @@ namespace SEQ.Script.Core
             return s;
         }
 
+        public string SpawnEvent = "";
+        bool SpawnAtStart => string.IsNullOrWhiteSpace(SpawnEvent);
         public override void Start()
         {
             base.Start();
-            DoSpawn();
-            ActorSpeciesRegistry.S.ResetSpawns += () =>
+            if (SpawnAtStart)
             {
                 DoSpawn();
-                CurrentActive = null;
-            };
+                ActorSpeciesRegistry.S.ResetSpawns += () =>
+                {
+                    DoSpawn();
+                    CurrentActive = null;
+                };
+            }
+            else
+            {
+                EventManager.AddListener(SpawnEvent, DoSpawn);
+            }
+        }
+
+        public override void Cancel()
+        {
+            base.Cancel();
+            EventManager.RemoveListener(SpawnEvent, DoSpawn);
         }
 
         Actor CurrentActive;

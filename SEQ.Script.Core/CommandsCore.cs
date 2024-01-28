@@ -105,6 +105,14 @@ namespace SEQ.Script.Core
                     Help = "Run a seq file"
                 }
             },
+            {
+                "raise", new CommandInfo
+                {
+                    Params = [typeof(string)],
+                    Exec = async args => EventManager.Raise((string)args[0]),
+                    Help = "Raise an event"
+                }
+            },
         };
     }
 }
