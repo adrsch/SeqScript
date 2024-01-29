@@ -56,6 +56,10 @@ namespace SEQ.Script.Core
             }
             else
             {
+                if (Entity.Get<ModelComponent>() is ModelComponent m)
+                {
+                    m.Enabled = false;
+                }
                 EventManager.AddListener(SpawnEvent, DoSpawn);
             }
         }
