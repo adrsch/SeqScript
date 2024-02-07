@@ -56,8 +56,15 @@ namespace SEQ.Script
             foreach (var img in Images)
             {
                 img.El = Root.FindVisualChildOfType<ImageElement>(img.Name);
-                img.El.Source = img.SpriteFromTex;
-                img.El.Visibility = Visibility.Collapsed;
+                if (img.El != null)
+                {
+                    img.El.Source = img.SpriteFromTex;
+                    img.El.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    Logger.Log(Channel.Data, LogPriority.Info, $"Template {Name}: Could not get image {img.Name} in HUD");
+                }
             }
         }
 
